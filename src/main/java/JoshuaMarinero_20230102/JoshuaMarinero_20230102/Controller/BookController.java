@@ -16,19 +16,24 @@ import java.util.Map;
 import java.util.Objects;
 
 @RestController
+//Se pone para asignarle una ruta a la api
 @RequestMapping("/apiBook")
 public class BookController {
+    //Se sobre escribe para tener acceso a la clase
     @Autowired
     private BookService service;
 
+    //logica para obtener los datos
     @GetMapping("/getAllBooks")
     public List<BookDTO>getallBooks(){
         return service.getAllBooks();
     }
+    //Se pone el {id} para encontrar el usuario que se desea buscar, es la ruta
     @GetMapping("/getBookById/{id}")
     public BookDTO getbookbyid(@PathVariable Long id){
          return service.getBookById(id);
     }
+    //logica de insert
     @PostMapping("/insertBook")
     public ResponseEntity<Map<String, Object>> registrar(@Valid @RequestBody BookDTO libro){
         try {
@@ -52,6 +57,7 @@ public class BookController {
                     ));
         }
     }
+    //logica de update
     @PutMapping("/updateBook/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id, @Valid @RequestBody BookDTO dto, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -67,6 +73,7 @@ public class BookController {
             return ResponseEntity.badRequest().body(Map.of("Error", e.getMessage()));
         }
     }
+    //logica de eliminar
     @DeleteMapping("/deleteBook/{id}")
     public ResponseEntity<Map<String, Object>> eliminar(@PathVariable Long id){
         try {

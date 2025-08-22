@@ -6,11 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+//Se agregarm todos los metodos Getter y setter
 @ToString
 @EqualsAndHashCode @Getter @Setter
 public class BookDTO {
     private int libro_id;
     private String titulo;
+    //Validacion NOTBLANK para validar
     @NotBlank
     private String isbn;
     private int anio_publicacion;
