@@ -46,8 +46,18 @@ public class BookService {
             return ConvertToDTO(bookSave);
         }catch (Exception e){
             log.error("Error al registrar usuario" + e.getMessage());
-            throw new RuntimeException ("El usuario no se encuentra");
+            throw new RuntimeException ("El usuario no se creo");
         }
+    }
+    public BookDTO updateBook (Long id, BookDTO dto){
+        BookEntity libroexistente = repo.getReferenceById(id);
+        libroexistente.setTitulo(dto.getTitulo());
+        libroexistente.setIsbn(dto.getTitulo());
+        libroexistente.setAnio_publicacion(dto.getAnio_publicacion());
+        libroexistente.setGenero(dto.getGenero());
+        libroexistente.setAutor_id(dto.getAutor_id());
+        BookEntity updated = repo.save(libroexistente);
+        return ConvertToDTO(updated);
     }
     public boolean deleteBook(Long id){
         try {
@@ -73,12 +83,11 @@ public class BookService {
     }
     private BookEntity ConvertToEntity(BookDTO dto) {
         BookEntity entity = new BookEntity();
-        entity.setLibro_id(entity.getLibro_id());
-        entity.setTitulo(entity.getTitulo());
-        entity.setIsbn(entity.getIsbn());
-        entity.setAnio_publicacion(entity.getAnio_publicacion());
-        entity.setGenero(entity.getGenero());
-        entity.setAutor_id(entity.getAutor_id());
+        entity.setTitulo(dto.getTitulo());
+        entity.setIsbn(dto.getIsbn());
+        entity.setAnio_publicacion(dto.getAnio_publicacion());
+        entity.setGenero(dto.getGenero());
+        entity.setAutor_id(dto.getAutor_id());
         return entity;
     }
 }
