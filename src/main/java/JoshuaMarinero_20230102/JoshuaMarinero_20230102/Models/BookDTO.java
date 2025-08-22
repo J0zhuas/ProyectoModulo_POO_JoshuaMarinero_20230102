@@ -11,7 +11,7 @@ public class BookDTO {
     private int libro_id;
     private String titulo;
     private String isbn;
-    private int año_publicacion;
+    private int anio_publicacion;
     private String genero;
     private int autor_id;
 }
